@@ -24,22 +24,21 @@ def input_students
 end
 
 def print_header
-  puts "The student of Villains Academy"
-  puts "------------"
+  puts "The student of Villains Academy".center(50)
+  puts "------------".center(50)
 end
 # print student list using iteration
 def print(students)
-  puts students
   counter = 0
   while students.length > counter
-  puts "#{counter + 1}.#{students[counter][:name]}, #{students[counter][:height]} cm tall, (#{students[counter][:cohort]} cohort)"
+  puts "#{counter + 1}.#{students[counter][:name]}, #{students[counter][:height]} cm tall, (#{students[counter][:cohort]} cohort)".center(50)
   counter += 1
   end
 end
 
 # finally we print the total number of students
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  puts "Overall, we have #{students.count} great students".center(50)
 end
 
 # nothing happens until we call the methods
