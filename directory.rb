@@ -5,19 +5,32 @@ def input_students
   students = []
   # get the first name
   name = gets.chomp
+
   puts "what is their hight in cm?"
   height = gets.chomp
+
+  puts "What month did they start?"
+  cohort = gets.chomp
+  if cohort.empty?
+    cohort = "default"
+  end
   # while the name is not empty repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november, height: height}
+    students << {name: name, cohort: cohort.to_sym, height: height}
     puts "Now we have #{students.count} students"
     # get another name from the user
     puts "name?"
     name = gets.chomp
     if !name.empty?
-    puts "height in cm?"
-    height = gets.chomp
+      puts "height in cm?"
+      height = gets.chomp
+    
+      puts "what month did they start?"
+      cohort = gets.chomp
+      if cohort.empty?
+        cohort = "default"
+      end
     end
   end
   students
