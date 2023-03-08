@@ -59,17 +59,22 @@ def print(students)
     p_cohort[cohort].push(person[:name])
 
   end
-  p_cohort.map do |month, names|
+  p_cohort.map do |month, names, height|
+    puts
     puts "#{month}".center(50)
     names.each_with_index do |name, index|
-    puts "#{index + 1}. #{name}".center(50)
+  puts "#{index + 1}. #{name}".center(50)
     end
   end
 end
 
 # finally we print the total number of students
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students".center(50)
+  if students.length == 1
+    puts "Overall, we have #{students.count} great student".center(50)
+  else
+    puts "Overall, we have #{students.count} great students".center(50)
+  end
 end
 
 # nothing happens until we call the methods
