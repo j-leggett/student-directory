@@ -1,62 +1,68 @@
+@students = []
+
 def input_students
   puts "Please enter the names of students"
   puts "To finish, just hit return twice"
-  # create an empty array
-  students = []
   # get the first name
   name = gets.chomp
   # while the name is not empty repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
+    @students << {name: name, cohort: :november}
+    puts "Now we have #{@students.count} students"
     # get another name from the user
     name = gets.chomp
-  end
-  students 
+  end 
 end
 
 def print_header
   puts "The student of Villains Academy"
   puts "------------"
 end
+
 # print student list using iteration
-def print(students)
-  students.each_with_index do |student, index|
+def print_student_list
+  @students.each_with_index do |student, index|
     puts "#{index + 1}.#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
 # finally we print the total number of students
-def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+def print_footer
+  puts "Overall, we have #{@students.count} great students"
 end
 
-def interactice_menu
-  students = []
-   # 4. repeat from step 1
-  loop do
-  # 1. print the menu and ask the user what to do
+def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "9. Exit"
-  # 2. read the input and save it in to a variable
-  selection = gets.chomp
-  # 3. do what the user has asked
-    case selection
+end
+
+def show_students
+  print_header
+  print_student_list
+  print_footer
+end
+
+def process(selection)
+  case selection
     when "1"
-      students = input_students
+      input_students
     when "2"
-      print_header
-      print(students)
-      print_footer(students)
+      show_students
     when "9"
       exit
     else
-      puts "i don't know what you meant, try again"
-    end
+      puts "I don't know what you mean, try again"
+  end
+end
+
+def interactive_menu
+  loop do
+  print_menu
+  process(gets.chomp)
   end
 end
 
 # nothing happens until we call the methods
-interactice_menu
+interactive_menu
