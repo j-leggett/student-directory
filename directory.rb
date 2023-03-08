@@ -1,18 +1,22 @@
 def input_students
+  month = { months: ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+  "October", "November", "December"]}
+
   puts "Please enter the names of students"
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
   # get the first name
-  name = gets.chomp
+  name = gets.chomp.capitalize
 
   puts "what is their hight in cm?"
   height = gets.chomp
 
   puts "What month did they start?"
-  cohort = gets.chomp
-  if cohort.empty?
-    cohort = "default"
+  cohort = gets.chomp.capitalize
+  until !cohort.empty? && month[:months].include?(cohort)
+    puts "Thats not a month, what month did they start?"
+    cohort = gets.chomp.capitalize
   end
   # while the name is not empty repeat this code
   while !name.empty? do
@@ -21,15 +25,16 @@ def input_students
     puts "Now we have #{students.count} students"
     # get another name from the user
     puts "name?"
-    name = gets.chomp
+    name = gets.chomp.capitalize
     if !name.empty?
       puts "height in cm?"
       height = gets.chomp
     
       puts "what month did they start?"
-      cohort = gets.chomp
-      if cohort.empty?
-        cohort = "default"
+      cohort = gets.chomp.capitalize
+      until !cohort.empty? && month[:months].include?(cohort)
+        puts "Thats not a month, what month did they start?"
+        cohort = gets.chomp.capitalize
       end
     end
   end
@@ -42,10 +47,23 @@ def print_header
 end
 # print student list using iteration
 def print(students)
-  counter = 0
-  while students.length > counter
-  puts "#{counter + 1}.#{students[counter][:name]}, #{students[counter][:height]} cm tall, (#{students[counter][:cohort]} cohort)".center(50)
-  counter += 1
+
+  p_cohort = {}
+  students.map do |person|
+    cohort = person[:cohort]
+
+    if p_cohort[cohort] == nil
+      p_cohort[cohort] = []
+    end
+
+    p_cohort[cohort].push(person[:name])
+
+  end
+  p_cohort.map do |month, names|
+    puts "#{month}".center(50)
+    names.each_with_index do |name, index|
+    puts "#{index + 1}. #{name}".center(50)
+    end
   end
 end
 
